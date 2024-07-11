@@ -30,8 +30,8 @@ public class User {
         this.pw = pw;
     }
 
-    public String[] getBooks() {
-        return books;
+    public String getBooks(int i) {
+        return books[i];
     }
 
     public void setBooks(String[] books) {

@@ -44,6 +44,14 @@ public class Book {
         return this.writer.equalsIgnoreCase(writer);
     }
 
+    public Boolean getLoan() {
+        return Loan;
+    }
+
+    public void setLoan(Boolean loan) {
+        Loan = loan;
+    }
+
     @Override
     public String toString() {
         return "책 제목: " + title + ", 저자: " + writer + ", 장르: " + genre;

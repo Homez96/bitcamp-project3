@@ -15,12 +15,13 @@ public class App {
     String[] loginMenus = {"로그인", "회원가입", "종료하기"};
     SignUp signUpCommand;
     SignIn signInCommand;
-    LibraryManagement libraryManagement = new LibraryManagement();
+    LibraryManagement libraryManagement;
     public App()
     {
         List<User> userList = new ArrayList<>();
         signUpCommand = new SignUp(userList);
         signInCommand = new SignIn(userList);
+        libraryManagement = new LibraryManagement(userList);
     }
 
     public static void main(String[] args) {

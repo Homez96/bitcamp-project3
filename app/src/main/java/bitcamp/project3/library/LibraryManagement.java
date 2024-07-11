@@ -2,17 +2,27 @@ package bitcamp.project3.library;
 
 import bitcamp.project3.util.BookManager;
 import bitcamp.project3.util.Prompt;
+import bitcamp.project3.vo.User;
+
+import java.util.List;
 
 public class LibraryManagement {
     BookManager bookManager = new BookManager();
     String[] libraryMenus = {"책 추가",  "책 목록 보기", "책 검색", "로그아웃"};
+    private List<User> userList;
+    public LibraryManagement(List list)
+    {
+        this.userList = list;
+    }
+
    public void libraryProcess(int key)
     {
+        status(key);
         printMenu();
         while (true)
         {
             try {
-                String command = Prompt.input("메인 > ");
+                String command = Prompt.input("도서관리 시스템 > ");
                 if (command.equals("menu"))
                 {
                     printMenu();
@@ -20,9 +30,8 @@ public class LibraryManagement {
                 }
                 int num = Integer.parseInt(command);
                 String menuTitle = getTitle(libraryMenus, num);
-                if(menuTitle.equals("종료하기"))
+                if(menuTitle.equals("로그아웃"))
                 {
-                    System.out.println("종료하기");
                     break;
                 }
                 switch (menuTitle)
@@ -48,6 +57,27 @@ public class LibraryManagement {
                 System.out.println("문자는 menu 말고 안됩니다");
             }
 
+        }
+    }
+    
+    void status(int key)
+    {
+        int counter = 0;
+        User user = userList.get(key);
+        for (int i = 0; i <= 2; i++)
+        {
+            if (user.getBooks(i) == null)
+            {
+                ++counter;
+            }
+        }
+        if (counter == 3) {
+            System.out.println("----------------------------------");
+            System.out.printf("%s, 님의 현재 대출현황  대여한 책이 없습니다\n",user.getName());
+        }else
+        {
+            System.out.println("----------------------------------");
+            System.out.printf("%s, 님의 현재 대출현황  %s, %s, %s 입니다\n",user.getName(),user.getBooks(0),user.getBooks(1),user.getBooks(2));
         }
     }
 
