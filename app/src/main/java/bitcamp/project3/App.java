@@ -1,5 +1,6 @@
 package bitcamp.project3;
 
+import bitcamp.project3.library.LibraryManagement;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.util.SignIn;
 import bitcamp.project3.util.SignUp;
@@ -11,17 +12,15 @@ import java.util.List;
 
 public class App {
 
-    String[] loginMenus = {"로그인", "회원가입", "종료하기", "책 추가",  "책 목록 보기", "책 검색", "장르 수정"};
+    String[] loginMenus = {"로그인", "회원가입", "종료하기"};
     SignUp signUpCommand;
     SignIn signInCommand;
-    BookManager bookManager;
-
+    LibraryManagement libraryManagement = new LibraryManagement();
     public App()
     {
         List<User> userList = new ArrayList<>();
         signUpCommand = new SignUp(userList);
         signInCommand = new SignIn(userList);
-        bookManager = new BookManager();
     }
 
     public static void main(String[] args) {
@@ -50,28 +49,17 @@ public class App {
                 switch (menuTitle)
                 {
                     case "로그인":
-                        if(signInCommand.signInProcess())
+                        int userKey = signInCommand.signInProcess();
+                        if(userKey == -1)
                         {
-                            System.out.println("로그인이 되었습니다");
+                            System.out.println("아이디 또는 비밀번호가 없거나 틀립니다 다시 입력해주세요");//로그인 이후 메뉴 출력
                             break;
                         }else {
-                            System.out.println("아이디 또는 비밀번호가 없거나 틀립니다 다시 입력해주세요");
+                            libraryManagement.libraryProcess(userKey);
                             break;
                         }
                     case "회원가입":
                         signUpCommand.signUpProcess();
-                        break;
-                    case "책 추가":
-                        bookManager.addBook();
-                        break;
-                    case "책 목록 보기":
-                        bookManager.listBooks();
-                        break;
-                    case "책 검색":
-                        bookManager.searchBook();
-                        break;
-                    case "장르 수정":
-                        bookManager.updateGenre();
                         break;
                     default:
                         System.out.println("없는 메뉴 입니다");

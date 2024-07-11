@@ -4,6 +4,7 @@ public class Book {
     private String title;
     private String writer;
     private String genre;
+    private Boolean Loan;
 
     public Book(String title, String writer, String genre) {
         this.title = title;
