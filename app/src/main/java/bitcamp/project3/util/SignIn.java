@@ -24,6 +24,7 @@ public class SignIn {
             User user = (User) obj;
             if(user.getId().equals(id) && user.getPw().equals(pw))
             {
+                System.out.println(user.getName()+"님 환영합니다");
                 return true;
             }
         }
