@@ -3,6 +3,7 @@ package bitcamp.project3;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.util.SignIn;
 import bitcamp.project3.util.SignUp;
+import bitcamp.project3.util.BookManager;
 import bitcamp.project3.vo.User;
 
 import java.util.ArrayList;
@@ -10,15 +11,19 @@ import java.util.List;
 
 public class App {
 
-    String[] loginMenus = {"로그인","회원가입","종료하기"};
+    String[] loginMenus = {"로그인", "회원가입", "종료하기", "책 추가",  "책 목록 보기", "책 검색", "장르 수정"};
     SignUp signUpCommand;
     SignIn signInCommand;
+    BookManager bookManager;
+
     public App()
     {
         List<User> userList = new ArrayList<>();
         signUpCommand = new SignUp(userList);
         signInCommand = new SignIn(userList);
+        bookManager = new BookManager();
     }
+
     public static void main(String[] args) {
         new App().loading();
     }
@@ -56,6 +61,18 @@ public class App {
                     case "회원가입":
                         signUpCommand.signUpProcess();
                         break;
+                    case "책 추가":
+                        bookManager.addBook();
+                        break;
+                    case "책 목록 보기":
+                        bookManager.listBooks();
+                        break;
+                    case "책 검색":
+                        bookManager.searchBook();
+                        break;
+                    case "장르 수정":
+                        bookManager.updateGenre();
+                        break;
                     default:
                         System.out.println("없는 메뉴 입니다");
                 }
@@ -67,10 +84,12 @@ public class App {
 
         }
     }
+
     String getTitle(String[] loginMenus, int command)
     {
         return isValidate(loginMenus, command) ? loginMenus[command-1] : null;
     }
+
     Boolean isValidate(String[] loginMenus, int command)
     {
         return command >= 1 && command <= loginMenus.length;
