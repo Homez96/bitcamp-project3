@@ -1,15 +1,33 @@
 package bitcamp.project3.vo;
 
+import java.util.Objects;
+
 public class Book {
     private String title;
     private String writer;
     private String genre;
-    private Boolean Loan;
+    private Boolean loan;
 
-    public Book(String title, String writer, String genre) {
+    public Book(){}
+
+    public Book(String title, String writer, String genre, boolean loan) {
         this.title = title;
         this.writer = writer;
         this.genre = genre;
+        this.loan = loan;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Book book = (Book) object;
+        return Objects.equals(title, book.title) && Objects.equals(writer, book.writer) && Objects.equals(genre, book.genre) && Objects.equals(loan, book.loan);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, writer, genre, loan);
     }
 
     public String getTitle() {
@@ -45,11 +63,11 @@ public class Book {
     }
 
     public Boolean getLoan() {
-        return Loan;
+        return loan;
     }
 
     public void setLoan(Boolean loan) {
-        Loan = loan;
+        this.loan = loan;
     }
 
     @Override

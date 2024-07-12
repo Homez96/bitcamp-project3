@@ -2,17 +2,23 @@ package bitcamp.project3.library;
 
 import bitcamp.project3.util.BookManager;
 import bitcamp.project3.util.Prompt;
+import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.User;
 
 import java.util.List;
 
 public class LibraryManagement {
-    BookManager bookManager = new BookManager();
-    String[] libraryMenus = {"책 추가",  "책 목록 보기", "책 검색", "로그아웃"};
+
+    String[] libraryMenus = {"대출하기",  "반납하기", "책 검색", "전체보기","로그아웃"};
+
+    BookManager bookManager;
     private List<User> userList;
-    public LibraryManagement(List list)
+    private List<Book> bookList;
+    public LibraryManagement(List userList , List bookList)
     {
-        this.userList = list;
+        this.userList = userList;
+        this.bookList = bookList;
+        bookManager = new BookManager(bookList, userList);
     }
 
    public void libraryProcess(int key)
@@ -36,17 +42,19 @@ public class LibraryManagement {
                 }
                 switch (menuTitle)
                 {
-                    case "책 추가":
-                        bookManager.addBook();
+                    case "대출하기":
+                        bookManager.bookLoan(key);
+                        status(key);
+                        printMenu();
                         break;
-                    case "책 목록 보기":
+                    case "반납하기":
+                        bookManager.returnBook();
+                        break;
+                    case "전체보기":
                         bookManager.listBooks();
                         break;
                     case "책 검색":
                         bookManager.searchBook();
-                        break;
-                    case "장르 수정":
-                        bookManager.updateGenre();
                         break;
                     default:
                         System.out.println("없는 메뉴 입니다");
@@ -62,22 +70,28 @@ public class LibraryManagement {
     
     void status(int key)
     {
+        String[] book = new String[3];
+        String blank  = "";
         int counter = 0;
         User user = userList.get(key);
         for (int i = 0; i <= 2; i++)
         {
             if (user.getBooks(i) == null)
             {
+                book[i] = blank;
                 ++counter;
+            }else
+            {
+                book[i] = user.getBooks(i);
             }
         }
         if (counter == 3) {
-            System.out.println("----------------------------------");
-            System.out.printf("%s, 님의 현재 대출현황  대여한 책이 없습니다\n",user.getName());
+            System.out.println("-------------------------------------------");
+            System.out.printf("%s, 님의 현재 대출현황 | 대여한 책이 없습니다\n",user.getName());
         }else
         {
-            System.out.println("----------------------------------");
-            System.out.printf("%s, 님의 현재 대출현황  %s, %s, %s 입니다\n",user.getName(),user.getBooks(0),user.getBooks(1),user.getBooks(2));
+            System.out.println("-------------------------------------------");
+            System.out.printf("%s, 님의 현재 대출현황입니다    %s,   %s,   %s \n",user.getName(), book[0], book[1], book[2]);
         }
     }
 
@@ -93,7 +107,7 @@ public class LibraryManagement {
 
     void printMenu()
     {
-        System.out.println("----------------------------------");
+        System.out.println("-------------------------------------------");
         for (int i = 0; i < libraryMenus.length; i++) {
             if (i + 1 == libraryMenus.length) {
                 System.out.printf("%d. %s \n", i + 1, libraryMenus[i]);
@@ -101,6 +115,6 @@ public class LibraryManagement {
                 System.out.printf("%d. %s \t", i + 1, libraryMenus[i]);
             }
         }
-        System.out.println("----------------------------------");
+        System.out.println("-------------------------------------------");
     }
 }

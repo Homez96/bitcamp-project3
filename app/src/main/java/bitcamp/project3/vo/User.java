@@ -34,7 +34,7 @@ public class User {
         return books[i];
     }
 
-    public void setBooks(String[] books) {
-        this.books = books;
+    public void setBooks(String books, int i) {
+        this.books[i] = books;
     }
 }
