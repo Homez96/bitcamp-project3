@@ -27,7 +27,16 @@ public class BookManager {
     }
 
     public void searchBook() {
-        String searchType = Prompt.input("검색할 타입을 입력하세요 (제목/저자): ");
+        String searchType;
+        while (true) {
+            searchType = Prompt.input("검색할 타입을 입력하세요 (제목/저자): ");
+            if (searchType.equalsIgnoreCase("제목") || searchType.equalsIgnoreCase("저자")) {
+                break;
+            } else {
+                System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+            }
+        }
+
         String searchValue = Prompt.input("검색어를 입력하세요: ");
 
         boolean found = false;
@@ -43,6 +52,7 @@ public class BookManager {
             System.out.println("검색 결과가 없습니다.");
         }
     }
+
 
     public void updateGenre() {
         String title = Prompt.input("장르를 수정할 책 제목을 입력하세요: ");
