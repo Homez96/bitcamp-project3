@@ -48,13 +48,19 @@ public class LibraryManagement {
                         printMenu();
                         break;
                     case "반납하기":
-                        bookManager.returnBook();
-                        break;
-                    case "전체보기":
-                        bookManager.listBooks();
+                        bookManager.returnBook(key);
+                        status(key);
+                        printMenu();
                         break;
                     case "책 검색":
                         bookManager.searchBook();
+                        status(key);
+                        printMenu();
+                        break;
+                    case "전체보기":
+                        bookManager.listBooks();
+                        status(key);
+                        printMenu();
                         break;
                     default:
                         System.out.println("없는 메뉴 입니다");

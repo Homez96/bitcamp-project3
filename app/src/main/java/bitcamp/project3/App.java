@@ -60,6 +60,7 @@ public class App {
                             break;
                         }else {
                             libraryManagement.libraryProcess(userKey);
+                            printMenu();
                             break;
                         }
                     case "회원가입":
@@ -116,6 +117,8 @@ public class App {
                 new Book("민지누나 개때리고 싶다","이태정","문학",true),
                 new Book("밥 뭐먹지?","배고파","음식",true),
                 new Book("1","1","1",true),
+                new Book("2","2","2",true),
+                new Book("3","3","3",true),
         };
         for (Object object : bookTest)
         {
