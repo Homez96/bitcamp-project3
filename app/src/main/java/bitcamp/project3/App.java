@@ -84,9 +84,9 @@ public class App {
         System.out.println("----------------------------------");
         for (int i = 0; i < loginMenus.length; i++) {
             if (i + 1 == loginMenus.length) {
-                System.out.printf("%d. %s \n", i + 1, loginMenus[i]);
+                System.out.printf("%d. %s\n", i + 1, loginMenus[i]);
             } else {
-                System.out.printf("%d. %s \t", i + 1, loginMenus[i]);
+                System.out.printf("%d. %s   ", i + 1, loginMenus[i]);
             }
         }
         System.out.println("----------------------------------");

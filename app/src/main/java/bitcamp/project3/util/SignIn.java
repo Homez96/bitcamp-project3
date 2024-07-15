@@ -41,22 +41,13 @@ public class SignIn {
         }
     }
 
-    public int findUser(List userList, String id, String pw)
-    {
-        int key = 0;
-        for(Object obj : userList)
-        {
-            User user = (User) obj;
-            if(user.getId().equals(id) && user.getPw().equals(pw))
-            {
-                key = userList.indexOf(user);
-                break;
-            }else
-            {
-                key = -1;
-                break;
+    public int findUser(List<User> userList, String id, String pw) {
+        for (int i = 0; i < userList.size(); i++) {
+            User user = userList.get(i);
+            if (user.getId().equals(id) && user.getPw().equals(pw)) {
+                return i;
             }
         }
-        return key;
+        return -1;
     }
 }

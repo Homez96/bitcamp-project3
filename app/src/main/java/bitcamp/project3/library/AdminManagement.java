@@ -27,16 +27,15 @@ public class AdminManagement {
         printMenu();
 
         while (true) {
+            try {
                 String command = Prompt.input("관리자 메뉴 > ");
-                if (command.equals("menu"))
-                {
+                if (command.equals("menu")) {
                     printMenu();
                     continue;
                 }
                 int num = Integer.parseInt(command);
                 String menuTitle = getTitle(adminMenu, num);
-                if (menuTitle.equals("로그아웃"))
-                {
+                if (menuTitle.equals("로그아웃")) {
                     break;
                 }
                 switch (menuTitle) {
@@ -58,10 +57,14 @@ public class AdminManagement {
                     case "회원삭제":
                         adminManager.memberDelete();
                         break;
-                        default:
+                    default:
                         System.out.println("잘못된 입력입니다. 다시 시도하세요.");
-                            break;
+                        break;
                 }
+            }catch (Exception e)
+            {
+                System.out.println("admin에서 발생하는 오류입니다");
+            }
         }
     }
 

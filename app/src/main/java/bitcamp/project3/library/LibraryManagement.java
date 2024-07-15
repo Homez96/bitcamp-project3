@@ -116,9 +116,9 @@ public class LibraryManagement {
         System.out.println("-------------------------------------------");
         for (int i = 0; i < libraryMenus.length; i++) {
             if (i + 1 == libraryMenus.length) {
-                System.out.printf("%d. %s \n", i + 1, libraryMenus[i]);
+                System.out.printf("%d. %s\n", i + 1, libraryMenus[i]);
             } else {
-                System.out.printf("%d. %s \t", i + 1, libraryMenus[i]);
+                System.out.printf("%d. %s   ", i + 1, libraryMenus[i]);
             }
         }
         System.out.println("-------------------------------------------");
