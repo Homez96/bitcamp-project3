@@ -3,6 +3,7 @@ package bitcamp.project3.util;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.User;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class AdminManager {
@@ -121,17 +122,22 @@ public class AdminManager {
             return;
         }
 
+
         String userId = Prompt.input("삭제할 회원의 ID를 입력하세요 : ");
-        for (User user : userList) {
+        Iterator<User> iterator = userList.iterator();
+        boolean found = false;
+
+        while (iterator.hasNext()) {
+            User user = iterator.next();
             if (user.getId().equals(userId)) {
                 System.out.printf("%s 계정이 삭제 되었습니다 : \n", user.getId());
-                userList.remove(user);
-                break;
-            }else
-            {
-                System.out.println("삭제하고자 하는 회원 ID가 없습니다");
-                break;
+                iterator.remove();  // 안전하게 요소를 제거합니다.
+                found = true;
             }
+        }
+
+        if (!found) {
+            System.out.println("삭제하고자 하는 회원 ID가 없습니다");
         }
     }
 
