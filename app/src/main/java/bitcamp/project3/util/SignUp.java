@@ -24,7 +24,7 @@ public class SignUp {
 
             id = Prompt.input("아이디를 입력해주세요 : ");
             if (!duplicateId(id)) {
-                    break;
+                break;
             }else
             {
                 System.out.println("이미 있는 아이디 입니다");
@@ -32,6 +32,7 @@ public class SignUp {
         }
         user.setId(id);
         user.setPw(Prompt.input("비밀번호를 입력해주세요 : "));
+        user.setAdmin(false);
         userList.add(user);
         System.out.println("회원가입이 완료되었습니다");
         System.out.println("-----------------------");

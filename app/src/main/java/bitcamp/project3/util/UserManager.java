@@ -3,14 +3,13 @@ package bitcamp.project3.util;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class BookManager {
+public class UserManager {
     private List<Book> bookList;
     private List<User> userList;
 
-    public BookManager(List<Book> bookList, List<User> userList) {
+    public UserManager(List<Book> bookList, List<User> userList) {
         this.bookList = bookList;
         this.userList = userList;
     }
@@ -61,14 +60,6 @@ public class BookManager {
                 }
             }
         }
-    }
-
-    public void addBook() {
-        String title = Prompt.input("책 제목: ");
-        String writer = Prompt.input("저자: ");
-        String genre = Prompt.input("장르: ");
-       // bookList.add(new Book(title, writer, genre));
-        System.out.println("책이 추가되었습니다.");
     }
 
     public void listBooks() {
@@ -126,20 +117,6 @@ public class BookManager {
         if (!found) {
             System.out.println("검색 결과가 없습니다.");
         }
-    }
-
-
-    public void updateGenre() {
-        String title = Prompt.input("장르를 수정할 책 제목을 입력하세요: ");
-        for (Book book : bookList) {
-            if (book.matchesTitle(title)) {
-                String newGenre = Prompt.input("새로운 장르를 입력하세요: ");
-                book.setGenre(newGenre);
-                System.out.println("장르가 수정되었습니다.");
-                return;
-            }
-        }
-        System.out.println("해당 제목의 책을 찾을 수 없습니다.");
     }
 
     public void returnBook(int key) {

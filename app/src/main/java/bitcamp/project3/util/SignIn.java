@@ -1,21 +1,44 @@
 package bitcamp.project3.util;
 
+import bitcamp.project3.library.AdminManagement;
+import bitcamp.project3.library.LibraryManagement;
+import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.User;
 
 import java.util.List;
 
 public class SignIn {
     private List<User> userList;
-    public SignIn(List list)
+    private List<Book> bookList;
+
+    public SignIn(List userList, List bookList)
     {
-        this.userList = list;
+        this.userList = userList;
+        this.bookList = bookList;
     }
 
-    public int signInProcess(){
+    public void signInProcess(){
         String id = Prompt.input("아이디를 입력해주세요 : ");
         String pw = Prompt.input("비밀번호를 입력해주세요 : ");
         int userKey = findUser(userList, id, pw);
-        return userKey;
+        if (userKey == -1)
+        {
+            System.out.println("아이디 및 비밀번호가 잘못 입력되었나 없는 계정입니다.");
+        }else
+        {
+            User user= userList.get(userKey);
+            if(user.getAdmin())
+            {
+                System.out.println(user.getName()+"님 환영합니다");
+                AdminManagement adminManagement = new AdminManagement(userList , bookList);
+                adminManagement.adminProcess();
+            }else
+            {
+                System.out.println(user.getName()+"님 환영합니다");
+                LibraryManagement libraryManagement = new LibraryManagement(userList, bookList);
+                libraryManagement.libraryProcess(userKey);
+            }
+        }
     }
 
     public int findUser(List userList, String id, String pw)
@@ -26,11 +49,14 @@ public class SignIn {
             User user = (User) obj;
             if(user.getId().equals(id) && user.getPw().equals(pw))
             {
-                System.out.println(user.getName()+"님 환영합니다");
                 key = userList.indexOf(user);
+                break;
+            }else
+            {
+                key = -1;
+                break;
             }
         }
         return key;
     }
-
 }

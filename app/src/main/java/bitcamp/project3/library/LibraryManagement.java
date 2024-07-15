@@ -1,6 +1,6 @@
 package bitcamp.project3.library;
 
-import bitcamp.project3.util.BookManager;
+import bitcamp.project3.util.UserManager;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.User;
@@ -11,14 +11,14 @@ public class LibraryManagement {
 
     String[] libraryMenus = {"대출하기",  "반납하기", "책 검색", "전체보기","로그아웃"};
 
-    BookManager bookManager;
+    UserManager bookManager;
     private List<User> userList;
     private List<Book> bookList;
     public LibraryManagement(List userList , List bookList)
     {
         this.userList = userList;
         this.bookList = bookList;
-        bookManager = new BookManager(bookList, userList);
+        bookManager = new UserManager(bookList, userList);
     }
 
    public void libraryProcess(int key)

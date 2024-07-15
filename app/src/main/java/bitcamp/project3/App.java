@@ -1,10 +1,8 @@
 package bitcamp.project3;
 
-import bitcamp.project3.library.LibraryManagement;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.util.SignIn;
 import bitcamp.project3.util.SignUp;
-import bitcamp.project3.util.BookManager;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.User;
 
@@ -16,14 +14,13 @@ public class App {
     String[] loginMenus = {"로그인", "회원가입", "종료하기"};
     SignUp signUpCommand;
     SignIn signInCommand;
-    LibraryManagement libraryManagement;
     List<Book> bookList = new ArrayList<>();
+    List<User> userList = new ArrayList<>();
+
     public App()
     {
-        List<User> userList = new ArrayList<>();
         signUpCommand = new SignUp(userList);
-        signInCommand = new SignIn(userList);
-        libraryManagement = new LibraryManagement(userList , bookList);
+        signInCommand = new SignIn(userList, bookList);
     }
 
     public static void main(String[] args) {
@@ -33,6 +30,7 @@ public class App {
     void loading()
     {
         addBook();
+        addUser();
         printMenu();
         while (true)
         {
@@ -53,16 +51,9 @@ public class App {
                 switch (menuTitle)
                 {
                     case "로그인":
-                        int userKey = signInCommand.signInProcess();
-                        if(userKey == -1)
-                        {
-                            System.out.println("아이디 또는 비밀번호가 없거나 틀립니다 다시 입력해주세요");//로그인 이후 메뉴 출력
-                            break;
-                        }else {
-                            libraryManagement.libraryProcess(userKey);
-                            printMenu();
-                            break;
-                        }
+                        signInCommand.signInProcess();
+                        break;
+
                     case "회원가입":
                         signUpCommand.signUpProcess();
                         break;
@@ -114,7 +105,6 @@ public class App {
                 new Book("리펙토링 하는법","리펙토링","공부",true),
                 new Book("떠먹여 줄테니 따라와 엄진영의 코딩 스쿨","엄진영","공부",true),
                 new Book("신나게 노는법","쿠크와 세이튼","고전",true),
-                new Book("민지누나 개때리고 싶다","이태정","문학",true),
                 new Book("밥 뭐먹지?","배고파","음식",true),
                 new Book("1","1","1",true),
                 new Book("2","2","2",true),
@@ -125,6 +115,28 @@ public class App {
             Book book = (Book) object;
             bookList.add(book);
         }
+    }
 
+    public void addUser()
+    {
+        String[] a = new String[]{null,null,null};
+        String[] b = new String[]{"왕좌의 게임1","왕좌의 게임2","왕좌의 게임3"};
+        String[] c = new String[]{"돈의속성","돈을 부르는 매너","세이노의 가르침"};
+        String[] d = new String[]{"호감의 시작","너에게 들려주는 단단한 말","만일 나에게 한 번의 아침이 남아 있다면"};
+        String[] e = new String[]{"나는 도대체 왜 피곤할까","초역 부처의 말","죽이고 싶은 아이2"};
+
+        User[] userTest = {
+                new User("admin","admin","1234", a,true),
+                new User("테스트1","test1","1234", b,false),
+                new User("테스트2","test2","5678", c,false),
+                new User("테스트3","test3","9101", d,false),
+                new User("테스트4","test4","1213", e,false)
+        };
+        for (Object object : userTest)
+        {
+            User user = (User) object;
+            userList.add(user);
+        }
     }
 }
+
