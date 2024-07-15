@@ -96,20 +96,20 @@ public class App {
     public void addBook()
     {
         Book[] bookTest = {
-                new Book("찬미누나와 함께하는 아크라시아 탐험","아브렐슈드","판타지",true),
-                new Book("이것만 하면 너도 버러지다","발탄","생활",true),
-                new Book("니나브의 활은 이렇게 쏴라","니나브","운동",true),
-                new Book("태어나보니 세계관 최강에 내가 가디언 the First 슬레이어?","카단","판타지",true),
-                new Book("샨디의 나이먹어도 어려지는 법","샨디","뷰티",true),
-                new Book("웨이에 화나도 참는법 ","웨이","문학",true),
-                new Book("자바의 정석","자바","공부",true),
-                new Book("리펙토링 하는법","리펙토링","공부",true),
-                new Book("떠먹여 줄테니 따라와 엄진영의 코딩 스쿨","엄진영","공부",true),
-                new Book("신나게 노는법","쿠크와 세이튼","고전",true),
-                new Book("밥 뭐먹지?","배고파","음식",true),
-                new Book("1","1","1",true),
-                new Book("2","2","2",true),
-                new Book("3","3","3",true),
+                new Book("스즈메의 문단속","신카이 마코토","소설",false),
+                new Book("달러구트 꿈 백화점","이미예","소설",true),
+                new Book("달러구트 꿈 백화점 2","이미예","소설",false),
+                new Book("불편한 편의점","김호연","소설",true),
+                new Book("메리골드 마음 세탁소","윤정은","소설",false),
+                new Book("꽃을 보듯 너를 본다 ","나태주","시",true),
+                new Book("자바의 정석","신용권","컴퓨터",true),
+                new Book("나는 오래된 거리처럼 너를 사랑하고","진은영","시",true),
+                new Book("떠먹여 줄테니 따라와 엄진영의 코딩 스쿨","엄진영","공부",false),
+                new Book("임신 출산 육아 대백과 최신개정판","삼성출판사","가정생활",true),
+                new Book("최소한의 한국사","최태성","역사",false),
+                new Book("test1","test1","1",true),
+                new Book("test2","test2","2",true),
+                new Book("test3","test3","3",true),
         };
         for (Object object : bookTest)
         {

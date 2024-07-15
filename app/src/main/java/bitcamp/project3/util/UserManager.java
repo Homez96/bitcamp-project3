@@ -70,12 +70,12 @@ public class UserManager {
                 if (book.getLoan())
                 {
                     System.out.println("-------------------------------------------------------------------------------------------------");
-                    System.out.printf("%s   |   %s  |   %s  |   \033[0;34m%s\033[0m \n",book.getTitle(), book.getWriter(), book.getGenre(), "대출 가능");
+                    System.out.printf("%s   |   %s   |   %s   |   \033[0;34m%s\033[0m \n",book.getTitle(), book.getWriter(), book.getGenre(), "대출 가능");
                     System.out.println("-------------------------------------------------------------------------------------------------");
                 }else
                 {
                     System.out.println("-------------------------------------------------------------------------------------------------");
-                    System.out.printf("%s   |   %s  |   %s  |   \033[0;31m%s\033[0m \n",book.getTitle(), book.getWriter(), book.getGenre(), "대출 불가");
+                    System.out.printf("%s   |   %s   |   %s   |   \033[0;31m%s\033[0m \n",book.getTitle(), book.getWriter(), book.getGenre(), "대출 불가");
                     System.out.println("-------------------------------------------------------------------------------------------------");
                 }
             }
@@ -102,12 +102,12 @@ public class UserManager {
                 if (book.getLoan())
                 {
                     System.out.println("-------------------------------------------------------------------------------------------------");
-                    System.out.printf("%s   |   %s  |   %s  |   \033[0;34m%s\033[0m \n",book.getTitle(), book.getWriter(), book.getGenre(), "대출 가능");
+                    System.out.printf("%s   |   %s   |   %s   |   \033[0;34m%s\033[0m \n",book.getTitle(), book.getWriter(), book.getGenre(), "대출 가능");
                     System.out.println("-------------------------------------------------------------------------------------------------");
                 }else
                 {
                     System.out.println("-------------------------------------------------------------------------------------------------");
-                    System.out.printf("%s   |   %s  |   %s  |   \033[0;31m%s\033[0m \n",book.getTitle(), book.getWriter(), book.getGenre(), "대출 불가");
+                    System.out.printf("%s   |   %s   |   %s   |   \033[0;31m%s\033[0m \n",book.getTitle(), book.getWriter(), book.getGenre(), "대출 불가");
                     System.out.println("-------------------------------------------------------------------------------------------------");
                 }
                 found = true;
@@ -120,41 +120,45 @@ public class UserManager {
     }
 
     public void returnBook(int key) {
-        // 5.삭제하고
         int bookNum;
         User user = userList.get(key);
+
         if (user.getBooks(0) == null && user.getBooks(1) == null && user.getBooks(2) == null) {
             System.out.println("현재 대출하신 도서가 없습니다");
             return;
         }
-        for (int i = 0; i < 3; i ++)
-        {
-            if (i == 2) {
-                System.out.printf("%d번 | %s\n", i+1,user.getBooks(i));
-            }else
-            {
-                System.out.printf("%d번 | %s  ", i+1,user.getBooks(i));
+
+        for (int i = 0; i < 3; i++) {
+            if (user.getBooks(i) == null) {
+                String blank = "";
+                if (i == 2) {
+                    System.out.printf("%d번 | %s\n", i + 1, blank);
+                } else {
+                    System.out.printf("%d번 | %s  ", i + 1, blank);
+                }
+            } else {
+                if (i == 2) {
+                    System.out.printf("%d번 | %s\n", i + 1, user.getBooks(i));
+                } else {
+                    System.out.printf("%d번 | %s  ", i + 1, user.getBooks(i));
+                }
             }
         }
 
-        while (true)
-        {
-            bookNum = Prompt.inputInt("대출하실 책 번호를 입력해주세요 :");
-            if (isValidate(bookNum) && user.getBooks(bookNum-1) != null)
-            {
+        while (true) {
+            bookNum = Prompt.inputInt("반납하실 책 번호를 입력해주세요 :");
+            if (isValidate(bookNum) && user.getBooks(bookNum - 1) != null) {
                 break;
-            }else
-            {
+            } else {
                 System.out.println("없는 번호이거나 해당 번호에 책이 없습니다");
             }
         }
 
-        String bookName = user.getBooks(bookNum-1);
-        for (Object obj : bookList)
-        {
+        String bookName = user.getBooks(bookNum - 1);
+
+        for (Object obj : bookList) {
             Book book = (Book) obj;
-            if (book.getTitle().equals(bookName))
-            {
+            if (book.getTitle().equals(bookName)) {
                 book.setLoan(true);
                 break;
             }
@@ -163,13 +167,12 @@ public class UserManager {
         for (int i = bookNum - 1; i < 2; i++) {
             user.setBooks(user.getBooks(i + 1), i);
         }
-        user.setBooks(null, 2); // 마지막 요소를 null로 설정
+        user.setBooks(null, 2);
 
         System.out.println("도서가 반납되었습니다.");
     }
 
-    Boolean isValidate(int command)
-    {
+    Boolean isValidate(int command) {
         return command >= 1 && command <= 3;
     }
 }
