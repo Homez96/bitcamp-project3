@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class AdminManagement {
     private ArrayList<Book> bookList = new ArrayList<>();
+    private ArrayList<Member> memberList = new ArrayList<>();
 
     public static void main(String[] args) {
         AdminManagement admin = new AdminManagement();
@@ -201,11 +202,11 @@ public class AdminManagement {
     }
 
     private void manageMembers(Scanner scanner) {
-        String overdueManagement = "1. 장기 미납자 관리";
+        String memberDelete = "1. 회원 삭제";
         String back = "0. 돌아가기";
 
         while (true) {
-            System.out.println(overdueManagement);
+            System.out.println(memberDelete);
             System.out.println(back);
             System.out.print("원하는 작업을 선택하세요: ");
             int choice = scanner.nextInt();
@@ -213,7 +214,7 @@ public class AdminManagement {
 
             switch (choice) {
                 case 1:
-                    manageOverdueMembers(scanner);
+                    memberDelete(scanner);
                     break;
                 case 0:
                     return;
@@ -223,8 +224,30 @@ public class AdminManagement {
         }
     }
 
-    private void manageOverdueMembers(Scanner scanner) {
-        System.out.println("장기 미납자 관리를 시작합니다.");
+    private void memberDelete(Scanner scanner) {
+        if (memberList.isEmpty()) {
+            System.out.println("등록된 회원을 찾을 수 없습니다.");
+            return;
+        }
+
+        System.out.println("삭제할 회원의 ID를 입력하세요: ");
+        String memberId = scanner.nextLine();
+
+        Member memberToDelete = null;
+        for (Member member : memberList) {
+            if (member.getId().equals(memberId)) {
+                memberToDelete = member;
+                break;
+            }
+        }
+        if (memberToDelete != null) {
+            memberList.remove(memberToDelete);
+            System.out.println("---------------------------");
+            System.out.println("회원 삭제 완료: " + memberToDelete);
+            System.out.println("---------------------------");
+        } else {
+            System.out.println("해당 ID를 가진 회원이 없습니다.");
+        }
     }
 
     private class Book {
@@ -265,6 +288,29 @@ public class AdminManagement {
         @Override
         public String toString() {
             return "제목: " + title + ", 저자: " + writer + ", 장르: " + genre;
+        }
+    }
+
+    private class Member {
+        private String name;
+        private String id;
+
+        public Member(String name, String id) {
+            this.name = name;
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        @Override
+        public String toString() {
+            return "이름: " + name + ", ID: " + id;
         }
     }
 }
