@@ -14,7 +14,7 @@ public class AdminManagement {
     private List<User> userList;
     private AdminManager adminManager;
 
-    private String[] adminMenu = {"책 추가", "책 전체보기", "도서수정", "도서삭제", "회원정보 보기", "회원삭제", "로그아웃"};
+    private String[] adminMenu = {"책 추가", "책 전체보기", "도서수정", "도서삭제", "회원정보 보기", "관리자 권한부여", "회원삭제", "로그아웃"};
 
     public AdminManagement(List userList, List bookList) {
         this.bookList = bookList;
@@ -54,6 +54,9 @@ public class AdminManagement {
                     case "회원정보 보기":
                         adminManager.listUsers();
                         break;
+                    case "관리자 권한부여":
+                        adminManager.updateMember();
+                        break;
                     case "회원삭제":
                         adminManager.memberDelete();
                         break;
@@ -61,9 +64,9 @@ public class AdminManagement {
                         System.out.println("잘못된 입력입니다. 다시 시도하세요.");
                         break;
                 }
-            }catch (Exception e)
+            }catch (NumberFormatException e)
             {
-                System.out.println("admin에서 발생하는 오류입니다");
+                System.out.println("문자는 menu 말고 안됩니다");
             }
         }
     }

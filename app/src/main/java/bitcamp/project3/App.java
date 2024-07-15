@@ -52,6 +52,7 @@ public class App {
                 {
                     case "로그인":
                         signInCommand.signInProcess();
+                        printMenu();
                         break;
 
                     case "회원가입":

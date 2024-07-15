@@ -92,11 +92,11 @@ public class LibraryManagement {
             }
         }
         if (counter == 3) {
-            System.out.println("-------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------");
             System.out.printf("%s, 님의 현재 대출현황 | 대여한 책이 없습니다\n",user.getName());
         }else
         {
-            System.out.println("-------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------");
             System.out.printf("%s, 님의 현재 대출현황입니다    %s,   %s,   %s \n",user.getName(), book[0], book[1], book[2]);
         }
     }
@@ -113,7 +113,7 @@ public class LibraryManagement {
 
     void printMenu()
     {
-        System.out.println("-------------------------------------------");
+        System.out.println("-------------------------------------------------------------------");
         for (int i = 0; i < libraryMenus.length; i++) {
             if (i + 1 == libraryMenus.length) {
                 System.out.printf("%d. %s\n", i + 1, libraryMenus[i]);
@@ -121,6 +121,6 @@ public class LibraryManagement {
                 System.out.printf("%d. %s   ", i + 1, libraryMenus[i]);
             }
         }
-        System.out.println("-------------------------------------------");
+        System.out.println("-------------------------------------------------------------------");
     }
 }
