@@ -1,8 +1,10 @@
 package bitcamp.project3;
 
+import bitcamp.project3.menu.MenuItem;
+import bitcamp.project3.menu.MenuGroup;
 import bitcamp.project3.util.Prompt;
-import bitcamp.project3.util.SignIn;
-import bitcamp.project3.util.SignUp;
+import bitcamp.project3.command.signin.SignIn;
+import bitcamp.project3.command.signup.SignUp;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.User;
 
@@ -11,87 +13,34 @@ import java.util.List;
 
 public class App {
 
-    String[] loginMenus = {"로그인", "회원가입", "종료하기"};
-    SignUp signUpCommand;
-    SignIn signInCommand;
+    MenuGroup mainMenu = new MenuGroup("메인");
+
     List<Book> bookList = new ArrayList<>();
     List<User> userList = new ArrayList<>();
 
     public App()
     {
-        signUpCommand = new SignUp(userList);
-        signInCommand = new SignIn(userList, bookList);
+        mainMenu.add(new MenuItem("로그인", new SignIn(userList, bookList)));
+        mainMenu.add(new MenuItem("회원가입", new SignUp(userList)));
     }
 
     public static void main(String[] args) {
-        new App().loading();
+        new App().execute();
     }
 
-    void loading()
+    void execute()
     {
         addBook();
         addUser();
-        printMenu();
-        while (true)
+        try{
+            mainMenu.execute();
+        }catch (Exception e)
         {
-            try {
-                String command = Prompt.input("메인 > ");
-                if (command.equals("menu"))
-                {
-                    printMenu();
-                    continue;
-                }
-                int num = Integer.parseInt(command);
-                String menuTitle = getTitle(loginMenus, num);
-                if(menuTitle.equals("종료하기"))
-                {
-                    System.out.println("종료하기");
-                    break;
-                }
-                switch (menuTitle)
-                {
-                    case "로그인":
-                        signInCommand.signInProcess();
-                        printMenu();
-                        break;
-
-                    case "회원가입":
-                        signUpCommand.signUpProcess();
-                        break;
-                    default:
-                        System.out.println("없는 메뉴 입니다");
-                }
-
-            }catch (NumberFormatException e)
-            {
-                System.out.println("문자는 menu 말고 안됩니다");
-            }
-
+            System.out.println("오류가 발생하였습니다");
         }
+        Prompt.close();
     }
-
-    String getTitle(String[] loginMenus, int command)
-    {
-        return isValidate(loginMenus, command) ? loginMenus[command-1] : null;
-    }
-
-    Boolean isValidate(String[] loginMenus, int command)
-    {
-        return command >= 1 && command <= loginMenus.length;
-    }
-
-    void printMenu()
-    {
-        System.out.println("----------------------------------");
-        for (int i = 0; i < loginMenus.length; i++) {
-            if (i + 1 == loginMenus.length) {
-                System.out.printf("%d. %s\n", i + 1, loginMenus[i]);
-            } else {
-                System.out.printf("%d. %s   ", i + 1, loginMenus[i]);
-            }
-        }
-        System.out.println("----------------------------------");
-    }
+    
 
     public void addBook()
     {

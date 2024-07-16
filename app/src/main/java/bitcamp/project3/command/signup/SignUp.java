@@ -1,10 +1,12 @@
-package bitcamp.project3.util;
+package bitcamp.project3.command.signup;
 
+import bitcamp.project3.command.Command;
+import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.User;
 
 import java.util.List;
 
-public class SignUp {
+public class SignUp implements Command {
     private List<User> userList;
 
     public SignUp(List list)
@@ -12,8 +14,8 @@ public class SignUp {
         this.userList = list;
     }
 
-    public void signUpProcess()
-    {
+    @Override
+    public void execute(String menuName) {
         System.out.println();
         System.out.println("-----------------------");
         User user = new User();
