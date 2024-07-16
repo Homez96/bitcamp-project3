@@ -67,6 +67,7 @@ public class BookLoan implements Command
             }else
             {
                 System.out.println("없는 책이거나 잘못된 책입니다");
+                break;
             }
         }
     }
