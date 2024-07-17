@@ -21,6 +21,7 @@ public class ReturnBook implements Command {
     @Override
     public void execute(String menuName) {
         int bookNum;
+        boolean check = false;
         User user = userList.get(key);
 
         if (user.getBooks(0) == null && user.getBooks(1) == null && user.getBooks(2) == null) {
@@ -46,12 +47,22 @@ public class ReturnBook implements Command {
         }
 
         while (true) {
-            bookNum = Prompt.inputInt("반납하실 책 번호를 입력해주세요 :");
+            bookNum = Prompt.inputInt("반납하실 책 번호를 입력해주세요 (0)뒤로가기):");
             if (isValidate(bookNum) && user.getBooks(bookNum - 1) != null) {
                 break;
-            } else {
+            } else if(bookNum == 0){
+                System.out.println("뒤로갑니다");
+                check = true;
+                break;
+            }else
+            {
                 System.out.println("없는 번호이거나 해당 번호에 책이 없습니다");
             }
+        }
+
+        if (check)
+        {
+            return;
         }
 
         String bookName = user.getBooks(bookNum - 1);
