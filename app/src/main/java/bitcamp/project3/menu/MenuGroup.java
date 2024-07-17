@@ -11,7 +11,6 @@ public class MenuGroup extends AbstractMenu {
     private Stack<String> menuPath;
     private ArrayList<Menu> children = new ArrayList<>();
     private String exitMenuTitle = "이전";
-
     public MenuGroup(String title) {
         super(title);
         menuPath = new Stack<>();
@@ -42,6 +41,8 @@ public class MenuGroup extends AbstractMenu {
                 }
 
                 menu.execute();
+                System.out.println("");
+                printMenus();
 
             } catch (NumberFormatException ex) {
                 System.out.println("숫자로 메뉴 번호를 입력하세요.");

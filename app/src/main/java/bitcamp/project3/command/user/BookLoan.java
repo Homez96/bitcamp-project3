@@ -57,11 +57,13 @@ public class BookLoan implements Command
                         }
                         break;
                     } else {
+                        check = true;
                         System.out.println(" 현재 회원님은 최대로 빌릴 수 있는 3권을 전부 대여중인 상태입니다 반납후에 다시 이용해 주세요");
                     }
                 }else
                 {
                     System.out.println("대여가 불가능한 책입니다");
+                    check = true;
                     break;
                 }
             }

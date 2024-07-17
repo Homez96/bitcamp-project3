@@ -27,7 +27,7 @@ public class ListBook implements Command {
                 }else
                 {
                     System.out.println("-------------------------------------------------------------------------------------------------");
-                    System.out.printf("%s   |   %s   |   %s   |   %s   |   \033[0;31m%s\033[0m \n",book.getTitle(),i+1, book.getWriter(), book.getGenre(), "대출 불가");
+                    System.out.printf("%d   |   %s   |   %s   |   %s   |   \033[0;31m%s\033[0m \n",i+1, book.getTitle(), book.getWriter(), book.getGenre(), "대출 불가");
                     System.out.println("-------------------------------------------------------------------------------------------------");
                 }
                 ++i;

@@ -2,10 +2,7 @@ package bitcamp.project3.command.signin;
 
 import bitcamp.project3.command.Command;
 import bitcamp.project3.command.admin.*;
-import bitcamp.project3.command.user.BookLoan;
-import bitcamp.project3.command.user.ListBook;
-import bitcamp.project3.command.user.ReturnBook;
-import bitcamp.project3.command.user.SearchBook;
+import bitcamp.project3.command.user.*;
 import bitcamp.project3.menu.MenuItem;
 import bitcamp.project3.menu.MenuGroup;
 import bitcamp.project3.util.Prompt;
@@ -25,6 +22,7 @@ public class SignIn implements Command {
     private void setupMenus() {
         userPage = new MenuGroup("회원");
         userPage.add(new MenuItem("대출하기", new BookLoan(key, userList, bookList)));
+        userPage.add(new MenuItem("대출현황", new Status(key, userList)));
         userPage.add(new MenuItem("반납하기", new ReturnBook(key, userList, bookList)));
         userPage.add(new MenuItem("도서검색", new SearchBook(bookList)));
         userPage.add(new MenuItem("전체확인", new ListBook(bookList)));
@@ -41,6 +39,7 @@ public class SignIn implements Command {
         adminPage.setExitMenuTitle("로그아웃");
         // 관리자 메뉴 항목 추가
     }
+
     public SignIn(List userList, List bookList)
     {
         this.userList = userList;
@@ -71,7 +70,7 @@ public class SignIn implements Command {
         }
     }
 
-    void status(int key)
+   public void status(int key)
     {
         String[] book = new String[3];
         String blank  = "";

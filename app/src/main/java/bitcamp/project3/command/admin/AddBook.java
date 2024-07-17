@@ -20,12 +20,14 @@ public class AddBook implements Command {
         book.setWriter(Prompt.input("저자 ? "));
         book.setGenre(Prompt.input("장르 ? "));
         book.setLoan(true);
-        System.out.println("요기");
         bookList.add(book);
-        System.out.println("죠기");
+
+        System.out.println("");
+        System.out.println("-----------------------");
         System.out.println("책 추가 완료:");
         System.out.println("제목: " + book.getTitle());
         System.out.println("저자: " + book.getWriter());
         System.out.println("장르: " + book.getGenre());
+        System.out.println("-----------------------");
     }
 }
